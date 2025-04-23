@@ -7,6 +7,16 @@ def get_predict_page():
 	return [
 		html.Div(
 			children=[
+				dbc.Toast(
+					"This toast is placed in the top right",
+					id="eval-toast",
+					header="Customer Churn Prediction",
+					is_open=False,
+					dismissable=True,
+					duration=4000,
+					icon="success",
+					style={"position": "fixed", "top": 40, "right": 40, "width": 350, "z-index": "99"},
+				),
 				html.H1("Prediction"),
 				html.P(
 					"Input new data with a select machine learning model to predict whether a customer will churn.",
@@ -16,12 +26,25 @@ def get_predict_page():
 				dbc.Select(
 					id="model-select",
 					options=[
-						{"label": "CORAL (Best Performing)", "value": "1"},
-						{"label": "Random Forest", "value": "2"},
+						{"label": "CORAL (Best Performing)", "value": "coral"},
+						{"label": "Random Forest", "value": "random_forest"},
 					],
-					style={"max-width": "50%", "margin-bottom": "4em"},
+					style={"max-width": "20em", "margin-bottom": "4em"},
 				),
-				html.Div(id="predict-input"),
-			]
+				html.Div(
+					children=[
+						html.Div(id="predict-input", style={"flex": "1", "width": "50%"}),
+						html.Div(id="predict-output", style={"flex": "1", "width": "50%"}),
+					],
+					style={
+						"display": "flex",
+						"justify-content": "space-between",
+						"gap": "2em",
+						"flex-direction": "row",
+						"width": "100%",
+					},
+				),
+			],
+			style={"width": "100%"},
 		)
 	]

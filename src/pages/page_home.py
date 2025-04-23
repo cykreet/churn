@@ -65,172 +65,163 @@ def get_home_page():
 					className="description",
 					style={"margin-bottom": "4em"},
 				),
-				html.Div(
-					children=[
-						dbc.Container(
+				dbc.Container(
+					[
+						dbc.Row(
 							[
-								dbc.Row(
+								dbc.Col(
 									[
-										dbc.Col(
+										dbc.Card(
 											[
-												dbc.Card(
+												dbc.CardHeader(
 													[
-														dbc.CardHeader(
+														html.P(
+															"Explore customer churn patterns across different countries",
+															className="card-subtitle text-muted",
+														),
+													]
+												),
+												dbc.CardBody(
+													[
+														dbc.Row(
 															[
-																html.P(
-																	"Explore customer churn patterns across different countries",
-																	className="card-subtitle text-muted",
-																),
+																dbc.Col(
+																	[
+																		html.Label(
+																			"Select metric to visualise:",
+																			className="font-weight-bold",
+																		),
+																		dcc.Dropdown(
+																			id="metric-dropdown",
+																			options=[
+																				{
+																					"label": "Churn Rate",
+																					"value": "Churn_Rate",
+																				},
+																				{
+																					"label": "Average Credit Score",
+																					"value": "Avg_Credit_Score",
+																				},
+																				{
+																					"label": "Average Age",
+																					"value": "Avg_Age",
+																				},
+																				{
+																					"label": "Average Balance",
+																					"value": "Avg_Balance",
+																				},
+																				{
+																					"label": "Average Tenure",
+																					"value": "Avg_Tenure",
+																				},
+																				{
+																					"label": "Active Member Rate",
+																					"value": "Active_Member_Rate",
+																				},
+																			],
+																			value="Churn_Rate",
+																			clearable=False,
+																			className="mb-4",
+																		),
+																	],
+																	width=12,
+																	lg=6,
+																)
 															]
 														),
-														dbc.CardBody(
+														dbc.Row(
 															[
-																dbc.Row(
+																dbc.Col(
 																	[
-																		dbc.Col(
+																		html.Div(
 																			[
-																				html.Label(
-																					"Select metric to visualise:",
-																					className="font-weight-bold",
-																				),
-																				dcc.Dropdown(
-																					id="metric-dropdown",
-																					options=[
-																						{
-																							"label": "Churn Rate",
-																							"value": "Churn_Rate",
-																						},
-																						{
-																							"label": "Average Credit Score",
-																							"value": "Avg_Credit_Score",
-																						},
-																						{
-																							"label": "Average Age",
-																							"value": "Avg_Age",
-																						},
-																						{
-																							"label": "Average Balance",
-																							"value": "Avg_Balance",
-																						},
-																						{
-																							"label": "Average Tenure",
-																							"value": "Avg_Tenure",
-																						},
-																						{
-																							"label": "Active Member Rate",
-																							"value": "Active_Member_Rate",
-																						},
-																					],
-																					value="Churn_Rate",
-																					clearable=False,
-																					className="mb-4",
-																				),
-																			],
-																			width=12,
-																			lg=6,
-																		)
-																	]
-																),
-																dbc.Row(
-																	[
-																		dbc.Col(
-																			[
-																				html.Div(
-																					[
-																						dcc.Graph(
-																							id="choropleth-map",
-																							figure=create_choropleth_map(),
-																							config={
-																								"displayModeBar": True,
-																								"scrollZoom": True,
-																								"responsive": True,
-																							},
-																							className="map-container",
-																						)
-																					],
-																					className="map-wrapper",
+																				dcc.Graph(
+																					id="choropleth-map",
+																					figure=create_choropleth_map(),
+																					config={
+																						"displayModeBar": True,
+																						"scrollZoom": True,
+																						"responsive": True,
+																					},
+																					className="map-container",
 																				)
 																			],
-																			width=12,
+																			className="map-wrapper",
 																		)
-																	]
-																),
+																	],
+																	width=12,
+																)
 															]
 														),
-													],
-													className="mb-4 shadow-sm",
-												)
+													]
+												),
 											],
-											width=12,
-											className="dashboard-container",
+											className="mb-4",
 										)
-									]
-								),
-								dbc.Row(
-									[
-										dbc.Col(
-											[
-												dbc.Card(
-													[
-														dbc.CardHeader("Country Details"),
-														dbc.CardBody(
-															html.Div(
-																id="country-details",
-																children=[
-																	html.P(
-																		"Click on a country in the map to see detailed metrics.",
-																		className="text-muted",
-																	)
-																],
-															)
-														),
-													]
-												)
-											],
-											width=12,
-											lg=6,
-										),
-										dbc.Col(
-											[
-												dbc.Card(
-													[
-														dbc.CardHeader("Churn Rate Comparison"),
-														dbc.CardBody(
-															dcc.Graph(
-																id="churn-bar-chart",
-																figure=px.bar(
-																	geo_churn_df,
-																	x="Country",
-																	y="Churn_Rate",
-																	text=geo_churn_df["Churn_Rate"].apply(
-																		lambda x: f"{x:.1%}"
-																	),
-																	color="Churn_Rate",
-																	color_continuous_scale="Reds",
-																	labels={"Churn_Rate": "Churn Rate"},
-																).update_layout(
-																	yaxis_tickformat=".0%",
-																	title="Churn Rate by Country",
-																	yaxis_title="Churn Rate",
-																	xaxis_title="Country",
-																),
-															)
-														),
-													]
-												)
-											],
-											width=12,
-											lg=6,
-										),
 									],
-									className="mt-4",
+									width=12,
+								)
+							]
+						),
+						dbc.Row(
+							[
+								dbc.Col(
+									[
+										dbc.Card(
+											[
+												dbc.CardHeader("Country Details"),
+												dbc.CardBody(
+													html.Div(
+														id="country-details",
+														children=[
+															html.P(
+																"Click on a country in the map to see detailed metrics.",
+																className="text-muted",
+															)
+														],
+													)
+												),
+											]
+										)
+									],
+									width=12,
+									lg=6,
+								),
+								dbc.Col(
+									[
+										dbc.Card(
+											[
+												dbc.CardHeader("Churn Rate Comparison"),
+												dbc.CardBody(
+													dcc.Graph(
+														id="churn-bar-chart",
+														figure=px.bar(
+															geo_churn_df,
+															x="Country",
+															y="Churn_Rate",
+															text=geo_churn_df["Churn_Rate"].apply(lambda x: f"{x:.1%}"),
+															color="Churn_Rate",
+															color_continuous_scale="Reds",
+															labels={"Churn_Rate": "Churn Rate"},
+														).update_layout(
+															yaxis_tickformat=".0%",
+															title="Churn Rate by Country",
+															yaxis_title="Churn Rate",
+															xaxis_title="Country",
+														),
+													)
+												),
+											]
+										)
+									],
+									width=12,
+									lg=6,
 								),
 							],
-							fluid=True,
+							className="mt-4",
 						),
-						html.Div(children=[], style={"display": "flex", "flex-direction": "column", "gap": "2em"}),
 					],
-					style={"display": "flex", "flex-direction": "row", "gap": "2em"},
+					fluid=True,
 				),
 			]
 		)

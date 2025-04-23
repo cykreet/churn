@@ -28,6 +28,7 @@ scikit-optimize = "^0.10.2"
 mord = "^0.7"
 imblearn = "^0.0"
 gunicorn = "^23.0.0"
+joblib = "^1.4.2"
 
 [build-system]
 requires = ["poetry-core"]

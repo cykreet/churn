@@ -58,12 +58,6 @@ th {
 	opacity: 100% !important;
 }
 
-form {
-	padding: 1em;
-	border: 1px solid #ccc;
-	border-radius: 0.5em;
-}
-
 .form-spacer > *:not(:last-child) {
 	margin-bottom: 1em;
 }
