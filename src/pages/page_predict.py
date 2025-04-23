@@ -30,7 +30,7 @@ def get_predict_page():
 								dbc.Select(
 									id="model-select",
 									options=[
-										{"label": "Artificial Neural Network (Best Performing)", "value": "ann"},
+										{"label": "Artificial Neural Network (Most Accurate)", "value": "ann"},
 										{"label": "Random Forest", "value": "random_forest"},
 									],
 									style={"max-width": "20em"},

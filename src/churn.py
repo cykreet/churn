@@ -6,7 +6,6 @@ import dash_bootstrap_components as dbc
 import joblib
 import pandas as pd
 from dash import Dash, Input, Output, State, dash_table, dcc, html
-from sklearn.preprocessing import StandardScaler
 from tensorflow.keras import models
 
 from pages.page_404 import get_404_page
