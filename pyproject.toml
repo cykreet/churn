@@ -33,7 +33,7 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-name = "snare"
+name = "churn"
 version = "0.1.0"
 description = "Add your description here"
 authors = ["cyreet"]
