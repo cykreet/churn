@@ -27,6 +27,7 @@ tensorflow = "^2.19.0"
 scikit-optimize = "^0.10.2"
 mord = "^0.7"
 imblearn = "^0.0"
+gunicorn = "^23.0.0"
 
 [build-system]
 requires = ["poetry-core"]
