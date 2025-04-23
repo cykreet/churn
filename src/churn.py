@@ -8,6 +8,7 @@ from pages.page_home import create_choropleth_map, get_geo_churn_frame, get_home
 from pages.page_predict import get_predict_page
 
 app = Dash(external_stylesheets=[dbc.themes.LUMEN, dbc.icons.FONT_AWESOME])
+server = app.server
 app.layout = [
 	html.Link(rel="stylesheet", href="styles.css"),
 	dcc.Location(id="url", refresh=False),
@@ -92,6 +93,24 @@ def display_country_details(clickData):
 			hover=True,
 			striped=True,
 			size="sm",
+		),
+	]
+
+
+@app.callback(Output("predict-input", "children"), Input("model-select", "value"), prevent_initial_call=True)
+def get_predict_input(value):
+	return [
+		dbc.Card(
+			[
+				dbc.CardHeader(
+					[
+						html.P(
+							"Input new data to predict whether a customer will churn",
+						)
+					]
+				),
+				dbc.CardBody([]),
+			]
 		),
 	]
 

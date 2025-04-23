@@ -14,13 +14,14 @@ def get_predict_page():
 				),
 				html.Span(children="SELECT MODEL", style={"font-weight": "bold", "font-size": "0.6em"}),
 				dbc.Select(
-					id="select",
+					id="model-select",
 					options=[
-						{"label": "Model 1 (Best Performing)", "value": "1"},
-						{"label": "Model 2", "value": "2"},
+						{"label": "CORAL (Best Performing)", "value": "1"},
+						{"label": "Random Forest", "value": "2"},
 					],
 					style={"max-width": "50%", "margin-bottom": "4em"},
 				),
+				html.Div(id="predict-input"),
 			]
 		)
 	]
