@@ -17,24 +17,64 @@ def get_predict_page():
 					icon="success",
 					style={"position": "fixed", "top": 40, "right": 40, "width": 350, "z-index": "99"},
 				),
-				html.H1("Prediction"),
+				html.H1("Churn Prediction"),
 				html.P(
 					"Input new data with a select machine learning model to predict whether a customer will churn.",
 					className="description",
 				),
-				html.Span(children="SELECT MODEL", style={"font-weight": "bold", "font-size": "0.6em"}),
-				dbc.Select(
-					id="model-select",
-					options=[
-						{"label": "CORAL (Best Performing)", "value": "coral"},
-						{"label": "Random Forest", "value": "random_forest"},
+				html.Div(
+					children=[
+						html.Div(
+							children=[
+								html.Span(children="SELECT MODEL", style={"font-weight": "bold", "font-size": "0.6em"}),
+								dbc.Select(
+									id="model-select",
+									options=[
+										{"label": "Artificial Neural Network (Best Performing)", "value": "ann"},
+										{"label": "Random Forest", "value": "random_forest"},
+									],
+									style={"max-width": "20em"},
+								),
+							]
+						),
+						html.Div(
+							children=[
+								html.Div(
+									id="predict-input",
+									style={
+										"max-width": "22em",
+										"font-size": "0.8em",
+										"margin-top": "1em",
+									},
+								),
+							]
+						),
 					],
-					style={"max-width": "20em", "margin-bottom": "4em"},
+					style={
+						"display": "flex",
+						"flex-direction": "row",
+						"margin-bottom": "2em",
+						"gap": "4em",
+						# "justify-content": "center",
+						"align-items": "center",
+					},
 				),
 				html.Div(
 					children=[
-						html.Div(id="predict-input", style={"flex": "1", "width": "50%"}),
-						html.Div(id="predict-output", style={"flex": "1", "width": "50%"}),
+						html.Div(id="upload-table", style={"flex": "1", "width": "50%"}),
+						html.Div(
+							children=[
+								html.Div(id="predict-output"),
+								# html.Div(id="predict-graph"),
+							],
+							style={
+								"display": "flex",
+								"flex-direction": "column",
+								"gap": "2em",
+								"flex": "1",
+								"width": "50%",
+							},
+						),
 					],
 					style={
 						"display": "flex",
