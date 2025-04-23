@@ -246,7 +246,6 @@ def predict_customer_churn(model, model_path, input_df):
 		scaler = joblib.load(os.path.join(os.path.dirname(__file__), "models/scaler.pkl"))
 		input_df = scaler.transform(input_df)
 		prediction = model.predict(input_df)
-		print(prediction)
 		prediction_value = prediction[0][0]
 	elif model_path.endswith(".pkl"):
 		prediction = model.predict_proba(input_df)
@@ -260,7 +259,6 @@ def load_model(model_path):
 	if not os.path.exists(model_path):
 		return None
 
-	print(model_path)
 	if model_path.endswith(".keras"):
 		return models.load_model(model_path)
 
