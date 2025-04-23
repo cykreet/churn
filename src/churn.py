@@ -4,10 +4,10 @@ import os
 
 import dash_bootstrap_components as dbc
 import joblib
-import numpy as np
-from dash import Dash, Input, Output, State, dcc, html, dash_table
-from keras import models
 import pandas as pd
+from dash import Dash, Input, Output, State, dash_table, dcc, html
+from sklearn.preprocessing import StandardScaler
+from tensorflow.keras import models
 
 from pages.page_404 import get_404_page
 from pages.page_home import create_choropleth_map, get_geo_churn_frame, get_home_page
@@ -243,7 +243,10 @@ def cell_select(active_cell, model_select, table_data):
 
 def predict_customer_churn(model, model_path, input_df):
 	if model_path.endswith(".keras"):
+		scaler = joblib.load(os.path.join(os.path.dirname(__file__), "models/scaler.pkl"))
+		input_df = scaler.transform(input_df)
 		prediction = model.predict(input_df)
+		print(prediction)
 		prediction_value = prediction[0][0]
 	elif model_path.endswith(".pkl"):
 		prediction = model.predict_proba(input_df)
@@ -257,6 +260,7 @@ def load_model(model_path):
 	if not os.path.exists(model_path):
 		return None
 
+	print(model_path)
 	if model_path.endswith(".keras"):
 		return models.load_model(model_path)
 
