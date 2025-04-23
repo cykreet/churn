@@ -19,7 +19,7 @@ def get_predict_page():
 						{"label": "Model 1 (Best Performing)", "value": "1"},
 						{"label": "Model 2", "value": "2"},
 					],
-					style={"max-width": "50%"},
+					style={"max-width": "50%", "margin-bottom": "4em"},
 				),
 			]
 		)
